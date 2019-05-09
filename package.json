@@ -2,9 +2,9 @@
   "name": "glitch-telegram-bot",
   "version": "0.0.1",
   "description": "Supreme bot",
-  "main": "test.js",
+  "main": "bot.js",
   "scripts": {
-    "start": "micro-bot -d ${PROJECT_DOMAIN}.glitch.me"
+    "start" : "node bot.js"
   },
   "dependencies": {
     "axios": "0.18.0",
