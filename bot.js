@@ -1,3 +1,5 @@
+const data = require('./data')
+
 const { Composer } = require('micro-bot')
 // const bot = new Composer()
 
@@ -8,7 +10,7 @@ const axios = require('axios')
 const url = require('url')
 
 
-import { getSongLinkData } from './data'
+
 
 
 // Export bot handler
@@ -30,7 +32,7 @@ bot.on('text', (ctx) => {
   let messageUrl
   try {
     messageUrl = new URL(ctx.message)
-    getSongLinkData(messageUrl.href).then(msg => {
+    data.getSongLinkData(messageUrl.href).then(msg => {
       ctx.reply(msg)
     }).catch(e => {
       ctx.reply("couldn't get de info")
