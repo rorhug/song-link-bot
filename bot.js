@@ -4,17 +4,23 @@ const { Composer } = require('micro-bot')
 // const bot = new Composer()
 
 const Telegraf = require('telegraf')
-const bot = new Telegraf(process.env.BOT_TOKEN)
+// const bot = new Telegraf(process.env.BOT_TOKEN)
 
 const axios = require('axios')
 const url = require('url')
 
 
 
+const PORT = process.env.PORT || 3000
+const URL = process.env.NOW_URL
+
+const bot = new Telegraf(process.env.BOT_TOKEN);
+bot.telegram.setWebhook(`${URL}/bot${process.env.BOT_TOKEN}`);
+bot.startWebhook(`/bot${process.env.BOT_TOKEN}`, null, PORT)
 
 
 // Export bot handler
-module.exports = bot
+// module.exports = bot
 
 bot.telegram.getMe().then((botInfo) => {
   bot.options.username = botInfo.username
