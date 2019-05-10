@@ -37,7 +37,7 @@ bot.start((ctx) => ctx.reply('Paste a link to a track'))
 bot.on('text', (ctx) => {
   let messageUrl
   try {
-    messageUrl = new URL(ctx.message)
+    messageUrl = new URL(ctx.message.text)
 
     data.getSongLinkData(messageUrl.href).then(msg => {
       ctx.reply(msg)
