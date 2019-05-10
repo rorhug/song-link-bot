@@ -14,10 +14,10 @@ const { URL } = require('url')
 const PORT = process.env.PORT || 3000
 const APP_URL = process.env.NOW_URL
 
-const bot = new Telegraf(process.env.BOT_TOKEN);
-bot.telegram.setWebhook(`${APP_URL}/bot${process.env.BOT_TOKEN}`);
-bot.startWebhook(`/bot${process.env.BOT_TOKEN}`, null, PORT)
+const bot = new Telegraf(process.env.BOT_TOKEN)
 
+bot.telegram.setWebhook(`${APP_URL}/bot${process.env.BOT_TOKEN}`).catch(console.error)
+bot.startWebhook(`/bot${process.env.BOT_TOKEN}`, null, PORT)
 
 // Export bot handler
 // module.exports = bot
@@ -39,11 +39,12 @@ bot.on('text', (ctx) => {
   try {
     messageUrl = new URL(ctx.message.text)
 
-    data.getSongLinkData(messageUrl.href).then(msg => {
-      ctx.reply(msg)
+    return data.getSongLinkData(messageUrl.href).then(msg => {
+      console.log(`Reply ${msg}`)
+      return ctx.reply(msg)
     }).catch(e => {
-      ctx.reply("couldn't get de info")
       console.error(e)
+      return ctx.reply("couldn't get de info")
     })
 
   } catch(e) {

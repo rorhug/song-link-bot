@@ -51,7 +51,7 @@ const serviceKeys = [
 
 const getSongLinkData = (link) => {
   return axios.get(
-    `https://song.link/${link.href}`,
+    `https://song.link/${link}`,
     {
       maxRedirects: 2
     }
@@ -67,6 +67,7 @@ const getSongLinkData = (link) => {
     // const findServiceByPrefix(data, "SPOTIFY")
 
     const services = data.songlink.nodesByUniqueId
+
 
     return serviceKeys.map(key => {
       let service = services[key]
